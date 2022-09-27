@@ -1,0 +1,34 @@
+<div class="container p-5">
+  <div [formGroup]="myFormGroup">
+    <div>
+      <label for="">title</label>
+      <input type="text" class="form-control w-100" formControlName="title">
+    </div>
+      
+    <div class="d-flex justify-content-start mt-3">
+      <button class="btn btn-primary" (click)="submitForm()">submit</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div>
+      <h1 >fetched todos</h1>
+      <div *ngIf="todosData$ |async as todosData">
+        <p>{{ todosData.trueTodos }} todos have done</p>
+        <p>{{ todosData.falseTodos }} todos remain</p>
+      </div>
+    </div>
+    <div *ngFor="let todo of todos$ | async">
+
+        <div style="background-color: rgb(228, 228, 228);" class="rounded shadow p-3 my-4 d-flex justify-content-around flex-column">
+          <div class="d-flex justify-content-between">
+            <p class="ms-3">{{ todo.text }}</p>
+            <input type="checkbox" name="" id="" [checked]=" todo.completed " (click)="checkTodo(todo.id)" style="cursor: pointer;">
+          </div>
+          <div class="d-flex justify-content-end mt-3">
+            <h6 (click)="deleteTodo(todo.id)" class="text-danger" style="cursor: pointer;">delete</h6>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
